@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">StarWars</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Films</string>
+    <string name="title_dashboard">Caracters</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_characters">Characters</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="erro_conexao_indisponivel">Erro de Conexão - Indisponivel</string>
+    <string name="title">Alerta</string>
+    <string name="ok">OK</string>
+    <string name="content">Sem conexão com a internet!</string>
+</resources>
