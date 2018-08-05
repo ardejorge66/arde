@@ -17,6 +17,10 @@ class FilmDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_film_detail)
 
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+
+
         val bundle = intent
 
         if (bundle != null) {
@@ -24,13 +28,17 @@ class FilmDetailActivity : AppCompatActivity() {
             var film = intent.getParcelableExtra(IFilm.FilmViewImpl.FILM_KEY) as Film
 
             tv_title?.text = ""
-            tv_director?.text = Html.fromHtml(getString(R.string.director,film?.director))
-            tv_opening_crawl?.text = Html.fromHtml(getString(R.string.opening_crawl,film?.opening_crawl))
-            tv_release_date?.text = Html.fromHtml(getString(R.string.data_create,film?.release_date))
-            tv_producer?.text = Html.fromHtml(getString(R.string.producer,film?.producer))
-            Picasso.get().load(Utils.getImage(film.url))
-                    .into(iv_film)
 
+            tv_director?.text = Html.fromHtml(getString(R.string.director,film?.director))
+
+            tv_opening_crawl?.text = Html.fromHtml(getString(R.string.opening_crawl,film?.opening_crawl))
+
+            tv_release_date?.text = Html.fromHtml(getString(R.string.data_create,film?.release_date))
+
+            tv_producer?.text = Html.fromHtml(getString(R.string.producer,film?.producer))
+
+            Picasso.get().load(Utils.getImage(film.url))
+                    .into(iv_people)
 
             setTitle("Film "+film?.title)
         }

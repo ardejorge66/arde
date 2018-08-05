@@ -17,7 +17,7 @@ class PeopleAdapter(val activity: PeopleFragment, var peoples: ArrayList<People>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater
                 .from(parent.context)
-                .inflate(R.layout.item_film, parent, false)
+                .inflate(R.layout.item_people, parent, false)
         val viewHolder = ViewHolder(view)
         parent.setOnClickListener { }
         return viewHolder
@@ -27,8 +27,8 @@ class PeopleAdapter(val activity: PeopleFragment, var peoples: ArrayList<People>
         holder.setDados(peoples[position])
 
         holder.itemView.cv_proximo.setOnClickListener {
-            val film = peoples[position]
-            activity.updateItemRecycler(film)
+            val people = peoples[position]
+            activity.updateItemRecycler(people)
         }
     }
 
@@ -43,13 +43,13 @@ class PeopleAdapter(val activity: PeopleFragment, var peoples: ArrayList<People>
 
             itemView.tv_title?.setText(people.name)
             Picasso.get().load(Utils.getImagePeople(people.url!!))
-                    .into(itemView.iv_film)
+                    .into(itemView.iv_people)
         }
     }
 
-    fun getPeoplesList(films: ArrayList<People>) {
+    fun getPeoplesList(peoples: ArrayList<People>) {
         this.peoples.clear()
-        this.peoples.addAll(films)
+        this.peoples.addAll(peoples)
         this.notifyDataSetChanged()
     }
 }

@@ -1,6 +1,5 @@
 package br.com.levisaturnino.novelas.adapter
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +13,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_film.view.*
 
 
-
-class FilmAdapter(val activity: FilmFragment,var films: ArrayList<Film> ) : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
+class FilmAdapter(val activity: FilmFragment, var films: ArrayList<Film>) : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater
@@ -39,14 +37,13 @@ class FilmAdapter(val activity: FilmFragment,var films: ArrayList<Film> ) : Recy
         return films.size
     }
 
-
-    inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun setDados(film: Film) {
 
             itemView.tv_title?.setText(film.title)
             Picasso.get().load(Utils.getImage(film.url))
-                    .into(itemView.iv_film)
+                    .into(itemView.iv_people)
         }
     }
 

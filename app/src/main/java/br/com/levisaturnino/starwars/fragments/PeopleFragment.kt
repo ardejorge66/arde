@@ -1,5 +1,6 @@
 package br.com.levisaturnino.starwars.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import br.com.levisaturnino.novelas.adapter.PeopleAdapter
 
 import br.com.levisaturnino.starwars.R
+import br.com.levisaturnino.starwars.activities.CharacterDetailActivity
 import br.com.levisaturnino.starwars.domain.People
 import br.com.levisaturnino.starwars.mvp.people.IPeople
 import br.com.levisaturnino.starwars.mvp.people.PeoplePresenter
@@ -24,21 +26,7 @@ class PeopleFragment :  InternetFragment(), IPeople.PeopleViewImpl, SwipeRefresh
 
     lateinit var inflate : View
 
-    override fun updateItemRecycler(People: People) {
-     /*   val intent = Intent(activity, PeopleDetailActivity::class.java)
 
-        intent.putExtra(IPeople.PeopleViewImpl.People_KEY, People)
-
-        startActivity(intent)*/
-
-    }
-
-
-    override fun updateListRecycler(Peoples: ArrayList<People>) {
-
-        PeopleAdapter!!.getPeoplesList(Peoples)
-        PeopleAdapter!!.notifyDataSetChanged()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -68,7 +56,20 @@ class PeopleFragment :  InternetFragment(), IPeople.PeopleViewImpl, SwipeRefresh
         return inflate
     }
 
+    override fun updateItemRecycler(people: People) {
+           val intent = Intent(activity, CharacterDetailActivity::class.java)
 
+           intent.putExtra(IPeople.PeopleViewImpl.People_KEY, people)
+
+           startActivity(intent)
+    }
+
+
+    override fun updateListRecycler(Peoples: ArrayList<People>) {
+
+        PeopleAdapter!!.getPeoplesList(Peoples)
+        PeopleAdapter!!.notifyDataSetChanged()
+    }
     override fun showProgressBar(visibilidade: Int) {
         if (inflate.sr_people?.isRefreshing!!) {
             inflate.sr_people?.isRefreshing = false

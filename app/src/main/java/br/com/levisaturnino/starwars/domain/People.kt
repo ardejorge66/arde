@@ -3,6 +3,8 @@ package br.com.levisaturnino.starwars.domain
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -66,4 +68,58 @@ data class People(
 
         @SerializedName("name")
         var name: String? = ""
-)
+):Parcelable {
+        constructor(parcel: Parcel) : this(
+                parcel.readValue(Int::class.java.classLoader) as? Int,
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.createStringArrayList(),
+                parcel.createStringArrayList(),
+                parcel.createStringArrayList(),
+                parcel.createStringArrayList(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString(),
+                parcel.readString()) {
+        }
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+                parcel.writeValue(id)
+                parcel.writeString(url)
+                parcel.writeString(edited)
+                parcel.writeString(created)
+                parcel.writeStringList(starships)
+                parcel.writeStringList(vehicles)
+                parcel.writeStringList(species)
+                parcel.writeStringList(films)
+                parcel.writeString(homeworld)
+                parcel.writeString(gender)
+                parcel.writeString(birth_year)
+                parcel.writeString(eye_color)
+                parcel.writeString(skin_color)
+                parcel.writeString(hair_color)
+                parcel.writeString(mass)
+                parcel.writeString(height)
+                parcel.writeString(name)
+        }
+
+        override fun describeContents(): Int {
+                return 0
+        }
+
+        companion object CREATOR : Parcelable.Creator<People> {
+                override fun createFromParcel(parcel: Parcel): People {
+                        return People(parcel)
+                }
+
+                override fun newArray(size: Int): Array<People?> {
+                        return arrayOfNulls(size)
+                }
+        }
+}
