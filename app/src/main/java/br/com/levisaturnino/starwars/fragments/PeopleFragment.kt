@@ -65,9 +65,9 @@ class PeopleFragment :  InternetFragment(), IPeople.PeopleViewImpl, SwipeRefresh
     }
 
 
-    override fun updateListRecycler(Peoples: ArrayList<People>) {
+    override fun updateListRecycler(peoples: ArrayList<People>) {
 
-        PeopleAdapter!!.getPeoplesList(Peoples)
+        PeopleAdapter!!.getPeoplesList(peoples)
         PeopleAdapter!!.notifyDataSetChanged()
     }
     override fun showProgressBar(visibilidade: Int) {

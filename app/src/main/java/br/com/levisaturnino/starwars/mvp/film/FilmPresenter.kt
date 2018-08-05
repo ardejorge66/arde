@@ -5,11 +5,10 @@ import android.content.Context
 import android.view.View
 
 import br.com.levisaturnino.starwars.domain.Film
-import br.com.levisaturnino.starwars.utils.Utils
 
 import java.util.*
 
-class FilmPresenter(val conts: Context) : IFilm.FilmPresenterImpl {
+class FilmPresenter( conts: Context) : IFilm.FilmPresenterImpl {
 
     private val model: IFilm.FilmModelImpl
     private var view: IFilm.FilmViewImpl? = null
@@ -31,12 +30,7 @@ class FilmPresenter(val conts: Context) : IFilm.FilmPresenterImpl {
 
     override fun getFilmsRequest() {
 
-        if (Utils.isNetworkAvailable(conts)) {
             model.getFilmsRequest()
-        } else {
-            Utils.getMessage(conts)
-        }
-
     }
 
 

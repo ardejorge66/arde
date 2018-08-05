@@ -13,6 +13,7 @@ import android.util.Log
 import br.com.levisaturnino.starwars.utils.Utils.isNetworkAvailable
 
 
+@Suppress("DEPRECATION")
 abstract class InternetFragment : Fragment() {
 
     private var mReceiver: ConexaoReceiver? = null
@@ -56,7 +57,7 @@ abstract class InternetFragment : Fragment() {
             Log.d("app", "Network connectivity change")
             if (intent.extras != null) {
                 val ni = intent.extras!!.get(ConnectivityManager.EXTRA_NETWORK_INFO) as NetworkInfo
-                if (ni != null && ni.state == NetworkInfo.State.CONNECTED) {
+                if (ni.state == NetworkInfo.State.CONNECTED) {
                     Log.i("app", "Network " + ni.typeName + " connected")
                 } else if (intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, java.lang.Boolean.FALSE)) {
                     Log.d("app", "There's no network connectivity")

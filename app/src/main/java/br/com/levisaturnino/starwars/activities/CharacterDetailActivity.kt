@@ -15,6 +15,11 @@ import kotlinx.android.synthetic.main.activity_character.*
 import kotlinx.android.synthetic.main.content_character.*
 import android.support.v4.content.ContextCompat
 import android.graphics.drawable.Drawable
+import android.os.Build
+import android.text.Html.fromHtml
+import android.text.Spanned
+
+
 
 
 
@@ -33,22 +38,19 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         if (bundle != null) {
 
-            var people = intent.getParcelableExtra(IPeople.PeopleViewImpl.People_KEY) as People
+            val people = intent.getParcelableExtra(IPeople.PeopleViewImpl.People_KEY) as People
 
+            tv_birth_year?.text = Utils.fromHtml(getString(R.string.birth_year,people.birth_year))
 
-            tv_birth_year?.text = Html.fromHtml(getString(R.string.birth_year,people?.birth_year))
+            tv_gender2?.text = Utils.fromHtml(getString(R.string.gender,people.gender))
 
+            tv_heigth?.text = Utils.fromHtml(getString(R.string.height,people.height))
 
-            tv_gender2?.text = Html.fromHtml(getString(R.string.gender,people?.gender))
+            tv_hair_color?.text = Utils.fromHtml(getString(R.string.hair_color,people.hair_color))
 
-            tv_heigth?.text = Html.fromHtml(getString(R.string.height,people?.height))
+            tv_skin_color?.text = Utils.fromHtml(getString(R.string.skin_color,people.skin_color))
 
-            tv_hair_color?.text = Html.fromHtml(getString(R.string.hair_color,people?.hair_color))
-
-
-            tv_skin_color?.text = Html.fromHtml(getString(R.string.skin_color,people?.skin_color))
-
-            tv_mass?.text = Html.fromHtml(getString(R.string.mass,people?.mass))
+            tv_mass?.text = Utils.fromHtml(getString(R.string.mass,people.mass))
 
             Picasso.get().load(Utils.getImagePeople(people.url!!))
                     .into(iv_people_detail)
@@ -56,6 +58,7 @@ class CharacterDetailActivity : AppCompatActivity() {
             setTitle(people.name)
         }
     }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

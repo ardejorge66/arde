@@ -7,6 +7,7 @@ import br.com.levisaturnino.starwars.database.AppDatabase
 import br.com.levisaturnino.starwars.domain.FilmList
 import br.com.levisaturnino.starwars.network.FilmService
 import br.com.levisaturnino.starwars.network.StarWarsApi
+import br.com.levisaturnino.starwars.utils.Utils
 
 
 import io.reactivex.Observable
@@ -56,14 +57,24 @@ class FilmModel(val conts: Context,private val presenter: IFilm.FilmPresenterImp
 
         database = AppDatabase.getAppDatabase(conts)
 
-        var filmsList  =   database!!.filmDao().all
+        val filmsList  =   database!!.filmDao().all
 
-        if(filmsList.size > 1){
-            presenter.showProgressBar(false)
-            presenter.updateListRecycler(ArrayList(filmsList))
-        }else{
-            filmObservable.subscribeWith<DisposableObserver<FilmList>>(filmObserver)
+        if (Utils.isNetworkAvailable(conts)) {
+
+            if(filmsList.size > 1){
+                presenter.showProgressBar(false)
+                presenter.updateListRecycler(ArrayList(filmsList))
+            }else{
+                filmObservable.subscribeWith<DisposableObserver<FilmList>>(filmObserver)
+            }
+        } else{
+            if(filmsList.size > 1){
+                presenter.showProgressBar(false)
+                presenter.updateListRecycler(ArrayList(filmsList))
+            }
         }
+
+
     }
 
     companion object {

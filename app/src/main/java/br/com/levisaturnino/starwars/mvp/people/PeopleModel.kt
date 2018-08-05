@@ -8,6 +8,7 @@ import br.com.levisaturnino.starwars.domain.FilmList
 import br.com.levisaturnino.starwars.domain.PeopleList
 import br.com.levisaturnino.starwars.network.PeopleService
 import br.com.levisaturnino.starwars.network.StarWarsApi
+import br.com.levisaturnino.starwars.utils.Utils
 
 
 import io.reactivex.Observable
@@ -18,14 +19,14 @@ import io.reactivex.schedulers.Schedulers
 class PeopleModel(val conts: Context,private val presenter: IPeople.PeoplePresenterImpl) : IPeople.PeopleModelImpl {
     private var database: AppDatabase? = null
 
-    val proximoCapituloObservable: Observable<PeopleList>
+    val peopleObservable: Observable<PeopleList>
         get() = StarWarsApi.client!!.create(PeopleService::class.java)
                 .peoples
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
 
-    val PeopleObserver: DisposableObserver<PeopleList>
+    val peopleObserver: DisposableObserver<PeopleList>
         get() {
 
             presenter.showProgressBar(true)
@@ -56,13 +57,21 @@ class PeopleModel(val conts: Context,private val presenter: IPeople.PeoplePresen
 
         database = AppDatabase.getAppDatabase(conts)
 
-        var filmsList  =   database!!.peopleDao().all
+        val peopleList  =   database!!.peopleDao().all
 
-        if(filmsList.size > 1){
-            presenter.showProgressBar(false)
-            presenter.updateListRecycler(ArrayList(filmsList))
-        }else{
-            proximoCapituloObservable.subscribeWith<DisposableObserver<PeopleList>>(PeopleObserver)
+        if (Utils.isNetworkAvailable(conts)) {
+
+            if(peopleList.size > 1){
+                presenter.showProgressBar(false)
+                presenter.updateListRecycler(ArrayList(peopleList))
+            }else{
+                peopleObservable.subscribeWith<DisposableObserver<PeopleList>>(peopleObserver)
+            }
+        } else{
+            if(peopleList.size > 1){
+                presenter.showProgressBar(false)
+                presenter.updateListRecycler(ArrayList(peopleList))
+            }
         }
     }
 

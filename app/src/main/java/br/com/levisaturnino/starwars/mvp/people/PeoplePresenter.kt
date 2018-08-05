@@ -6,11 +6,10 @@ import android.view.View
 
 
 import br.com.levisaturnino.starwars.domain.People
-import br.com.levisaturnino.starwars.utils.Utils
 
 import java.util.*
 
-class PeoplePresenter(val conts: Context) : IPeople.PeoplePresenterImpl {
+class PeoplePresenter( conts: Context) : IPeople.PeoplePresenterImpl {
 
     private val model: IPeople.PeopleModelImpl
     private var view: IPeople.PeopleViewImpl? = null
@@ -19,8 +18,8 @@ class PeoplePresenter(val conts: Context) : IPeople.PeoplePresenterImpl {
     override fun setView(view: IPeople.PeopleViewImpl) {
         this.view = view    }
 
-    override fun updateListRecycler(Peoples: ArrayList<People>) {
-        view!!.updateListRecycler(Peoples)    }
+    override fun updateListRecycler(peoples: ArrayList<People>) {
+        view!!.updateListRecycler(peoples)    }
 
     override val context: Context
         get() = (view as Context?)!!
@@ -31,12 +30,8 @@ class PeoplePresenter(val conts: Context) : IPeople.PeoplePresenterImpl {
 
 
     override fun getPeoplesRequest() {
-       if (Utils.isNetworkAvailable(conts)) {
-            model.getPeoplesRequest()
-        } else {
-            Utils.getMessage(conts)
-        }
 
+            model.getPeoplesRequest()
     }
 
 

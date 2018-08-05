@@ -20,27 +20,27 @@ class FilmDetailActivity : AppCompatActivity() {
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
-
         val bundle = intent
 
         if (bundle != null) {
 
-            var film = intent.getParcelableExtra(IFilm.FilmViewImpl.FILM_KEY) as Film
+            val film = intent.getParcelableExtra(IFilm.FilmViewImpl.FILM_KEY) as Film
 
             tv_title?.text = ""
 
-            tv_director?.text = Html.fromHtml(getString(R.string.director,film?.director))
+            tv_director?.text = Utils.fromHtml(getString(R.string.director, film.director))
 
-            tv_opening_crawl?.text = Html.fromHtml(getString(R.string.opening_crawl,film?.opening_crawl))
+            tv_opening_crawl?.text = Utils.fromHtml(getString(R.string.opening_crawl,film.opening_crawl))
 
-            tv_release_date?.text = Html.fromHtml(getString(R.string.data_create,film?.release_date))
+            tv_release_date?.text = Utils.fromHtml(getString(R.string.data_create,film.release_date))
 
-            tv_producer?.text = Html.fromHtml(getString(R.string.producer,film?.producer))
+            tv_producer?.text = Utils.fromHtml(getString(R.string.producer,film.producer))
 
-            Picasso.get().load(Utils.getImage(film.url))
+            Picasso.get()
+                    .load(Utils.getImage(film.url))
                     .into(iv_people)
 
-            setTitle("Film "+film?.title)
+            setTitle(film.title)
         }
     }
 }
