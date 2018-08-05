@@ -1,5 +1,4 @@
-package br.com.levisaturnino.novelas.mvp.proximocapitulo
-
+package br.com.levisaturnino.starwars.mvp.film
 
 import br.com.levisaturnino.starwars.domain.Film
 import java.util.ArrayList

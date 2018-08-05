@@ -14,9 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-    var fragment: Fragment? = null
     var fragmentTransaction: FragmentTransaction? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         switchFragment(FilmFragment())
 
-        //navigation.getChildAt(0).setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary))
+
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

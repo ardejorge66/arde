@@ -8,10 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.levisaturnino.novelas.adapter.PeopleAdapter
-import br.com.levisaturnino.novelas.mvp.proximocapitulo.IPeople
-import br.com.levisaturnino.novelas.mvp.proximocapitulo.PeoplePresenter
+
 import br.com.levisaturnino.starwars.R
 import br.com.levisaturnino.starwars.domain.People
+import br.com.levisaturnino.starwars.mvp.people.IPeople
+import br.com.levisaturnino.starwars.mvp.people.PeoplePresenter
 import br.com.levisaturnino.starwars.utils.InternetFragment
 import kotlinx.android.synthetic.main.fragment_people.view.*
 
@@ -47,7 +48,7 @@ class PeopleFragment :  InternetFragment(), IPeople.PeopleViewImpl, SwipeRefresh
 
 
         if (presenter == null) {
-            presenter = PeoplePresenter()
+            presenter = PeoplePresenter(context!!)
         }
         presenter!!.setView(this)
 

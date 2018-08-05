@@ -19,8 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FilmDetailActivity"
-            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".activities.FilmDetailActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.CharacterActivity"
+            android:label="@string/title_activity_character"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

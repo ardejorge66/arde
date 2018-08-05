@@ -3,6 +3,8 @@ package br.com.levisaturnino.starwars.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.os.Build
+import android.widget.Toast
 import br.com.levisaturnino.starwars.R
 import com.afollestad.materialdialogs.MaterialDialog
 
@@ -39,12 +41,33 @@ object Utils{
     }
 
     fun isNetworkAvailable(mContext: Context): Boolean {
-        val connectivityManager = mContext.getSystemService(Context.CONNECTIVITY_SERVICE)
-        return if (connectivityManager is ConnectivityManager) {
-            val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
-            networkInfo?.isConnected ?: false
-        } else false
+        val connectivityManager = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            assert(connectivityManager != null)
+            val networks = connectivityManager.allNetworks
+            var networkInfo: NetworkInfo
+            for (mNetwork in networks) {
+                networkInfo = connectivityManager.getNetworkInfo(mNetwork)
+                if (networkInfo.state == NetworkInfo.State.CONNECTED) {
+                    return true
+                }
+            }
+        } else {
+            if (connectivityManager != null) {
 
+                val info = connectivityManager.allNetworkInfo
+                if (info != null) {
+                    for (anInfo in info) {
+                        if (anInfo.state == NetworkInfo.State.CONNECTED) {
+                            // Log.d("Network","NETWORKNAME: " + anInfo.getTypeName());
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+        Toast.makeText(mContext, mContext.getString(R.string.erro_conexao_indisponivel), Toast.LENGTH_SHORT).show()
+        return false
     }
 
     fun getMessage(context: Context) {

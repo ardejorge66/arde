@@ -1,13 +1,16 @@
-package br.com.levisaturnino.novelas.mvp.proximocapitulo
+package br.com.levisaturnino.starwars.mvp.people
 
 
 import android.content.Context
 import android.view.View
+
+
 import br.com.levisaturnino.starwars.domain.People
+import br.com.levisaturnino.starwars.utils.Utils
 
 import java.util.*
 
-class PeoplePresenter : IPeople.PeoplePresenterImpl {
+class PeoplePresenter(val conts: Context) : IPeople.PeoplePresenterImpl {
 
     private val model: IPeople.PeopleModelImpl
     private var view: IPeople.PeopleViewImpl? = null
@@ -23,16 +26,16 @@ class PeoplePresenter : IPeople.PeoplePresenterImpl {
         get() = (view as Context?)!!
 
     init {
-        this.model = PeopleModel(this)
+        this.model = PeopleModel(conts,this)
     }
 
 
     override fun getPeoplesRequest() {
-       // if (Utils.isNetworkAvailable(context)) {
+       if (Utils.isNetworkAvailable(conts)) {
             model.getPeoplesRequest()
-        /*} else {
-            Utils.getMessage(context)
-        }*/
+        } else {
+            Utils.getMessage(conts)
+        }
 
     }
 

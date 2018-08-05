@@ -1,53 +1,65 @@
 package br.com.levisaturnino.starwars.domain
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-
+@Entity
 data class Film(
         @Expose
         @SerializedName("title")
-        val title: String,
-
+        var title: String = "",
+        @PrimaryKey()
+        @Expose
+        @SerializedName("episode_id")
+        var episode_id: String = "",
         @Expose
         @SerializedName("opening_crawl")
-        val opening_crawl: String,
+        var opening_crawl: String = "",
         @Expose
         @SerializedName("director")
-        val director: String,
+        var director: String = "",
         @Expose
         @SerializedName("producer")
-        val producer: String,
+        var producer: String = "",
         @Expose
         @SerializedName("release_date")
-        val release_date: String,
+        var release_date: String = "",
         @Expose
         @SerializedName("characters")
-        var characters: List<String>,
+        @Ignore
+        var characters: List<String>? = null,
         @Expose
         @SerializedName("planets")
-        var planets: List<String>,
+        @Ignore
+        var planets: List<String>? = null,
         @Expose
         @SerializedName("starships")
-        var starships: List<String>,
+        @Ignore
+        var starships: List<String>? = null,
         @Expose
         @SerializedName("vehicles")
-        var vehicles: List<String>,
+        @Ignore
+        var vehicles: List<String>? = null,
         @Expose
         @SerializedName("species")
-        var species: List<String>,
+        @Ignore
+        var species: List<String>? = null,
         @Expose
         @SerializedName("created")
-        val created: String,
+        var created: String = "",
         @Expose
         @SerializedName("edited")
-        val edited: String,
+        var edited: String = "",
         @Expose
         @SerializedName("url")
-        val url: String):Parcelable {
+        var url: String = ""):Parcelable {
         constructor(parcel: Parcel) : this(
+                parcel.readString(),
                 parcel.readString(),
                 parcel.readString(),
                 parcel.readString(),
@@ -65,6 +77,7 @@ data class Film(
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
                 parcel.writeString(title)
+                parcel.writeString(episode_id)
                 parcel.writeString(opening_crawl)
                 parcel.writeString(director)
                 parcel.writeString(producer)

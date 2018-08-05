@@ -1,6 +1,8 @@
-package br.com.levisaturnino.novelas.mvp.proximocapitulo
-
+package br.com.levisaturnino.starwars.mvp.film
+import android.content.Context
 import android.util.Log
+
+import br.com.levisaturnino.starwars.database.AppDatabase
 
 import br.com.levisaturnino.starwars.domain.FilmList
 import br.com.levisaturnino.starwars.network.FilmService
@@ -12,16 +14,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
-class FilmModel(private val presenter: IFilm.FilmPresenterImpl) : IFilm.FilmModelImpl {
+class FilmModel(val conts: Context,private val presenter: IFilm.FilmPresenterImpl) : IFilm.FilmModelImpl {
 
-    val proximoCapituloObservable: Observable<FilmList>
+    private var database: AppDatabase? = null
+
+
+    val filmObservable: Observable<FilmList>
         get() = StarWarsApi.client!!.create(FilmService::class.java)
                 .films
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
-
-    //   showProgressBar(false);
     val filmObserver: DisposableObserver<FilmList>
         get() {
 
@@ -30,8 +33,9 @@ class FilmModel(private val presenter: IFilm.FilmPresenterImpl) : IFilm.FilmMode
             return object : DisposableObserver<FilmList>() {
 
                 override fun onNext(filmList: FilmList) {
-                    presenter.updateListRecycler(filmList.films)
 
+                    database!!.filmDao().insertMultipleoFilm(filmList.films)
+                    presenter.updateListRecycler(ArrayList(filmList.films))
                 }
 
                 override fun onError(e: Throwable) {
@@ -49,7 +53,17 @@ class FilmModel(private val presenter: IFilm.FilmPresenterImpl) : IFilm.FilmMode
         }
 
     override fun getFilmsRequest() {
-        proximoCapituloObservable.subscribeWith<DisposableObserver<FilmList>>(filmObserver)
+
+        database = AppDatabase.getAppDatabase(conts)
+
+        var filmsList  =   database!!.filmDao().all
+
+        if(filmsList.size > 1){
+            presenter.showProgressBar(false)
+            presenter.updateListRecycler(ArrayList(filmsList))
+        }else{
+            filmObservable.subscribeWith<DisposableObserver<FilmList>>(filmObserver)
+        }
     }
 
     companion object {

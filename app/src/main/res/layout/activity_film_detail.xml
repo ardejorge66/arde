@@ -7,17 +7,7 @@
     android:layout_height="match_parent"
   >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-       />
+
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -27,101 +17,125 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
-
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/cl"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context=".activities.NovelaDetalhesActivity"
             tools:showIn="@layout/activity_film_detail">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:elevation="4dp"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="4dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" >
 
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="A New Hope"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_film"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_film"
-                android:layout_width="171dp"
-                android:layout_height="224dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="fitXY"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/img_4" />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".activities.NovelaDetalhesActivity"
+        tools:showIn="@layout/activity_film_detail">
 
-            <TextView
-                android:id="@+id/tv_release_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Date Created: 05-19-2005"
-                app:layout_constraintEnd_toEndOf="@+id/tv_title"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tv_title"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="A New Hope"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_film"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_director"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="24dp"
-                android:text="Director: George Lucas"
-                app:layout_constraintEnd_toEndOf="@+id/tv_title"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tv_release_date"
-                app:layout_constraintTop_toBottomOf="@+id/tv_release_date" />
+        <ImageView
+            android:id="@+id/iv_film"
+            android:layout_width="171dp"
+            android:layout_height="224dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_4" />
 
-            <TextView
-                android:id="@+id/tv_producer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="24dp"
-                android:text="Producer(s): Rick McCallum "
-                app:layout_constraintEnd_toEndOf="@+id/tv_title"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tv_director"
-                app:layout_constraintTop_toBottomOf="@+id/tv_director" />
+        <TextView
+            android:id="@+id/tv_release_date"
+            android:layout_width="131dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/data_create"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-            <TextView
-                android:id="@+id/tv_opening_crawl"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"
-                android:padding="20dp"
-                android:text="Opening Crawl: War! The Republic is crumbling  under attacks by the ruthless  Sith Lord, Count Dooku.  There are heroes on both sides.  Evil is everywhere.    In a stunning move, the  fiendish droid leader, General  Grievous, has swept into the  Republic capital and kidnapped  Chancellor Palpatine, leader of  the Galactic Senate.    As the Separatist Droid Army  attempts to flee the besieged  capital with their valuable  hostage, two Jedi Knights lead a  desperate mission to rescue the  captive Chancellor...."
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.6"
-                app:layout_constraintStart_toStartOf="@+id/iv_film"
-                app:layout_constraintTop_toBottomOf="@+id/iv_film" />
+        <TextView
+            android:id="@+id/tv_director"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/director"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_release_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_release_date" />
 
+        <TextView
+            android:id="@+id/tv_producer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Producer(s): Rick McCallum "
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_director"
+            app:layout_constraintTop_toBottomOf="@+id/tv_director" />
+
+        <TextView
+            android:id="@+id/tv_opening_crawl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:padding="20dp"
+            android:text="Opening Crawl: War! The Republic is crumbling  under attacks by the ruthless  Sith Lord, Count Dooku.  There are heroes on both sides.  Evil is everywhere.    In a stunning move, the  fiendish droid leader, General  Grievous, has swept into the  Republic capital and kidnapped  Chancellor Palpatine, leader of  the Galactic Senate.    As the Separatist Droid Army  attempts to flee the besieged  capital with their valuable  hostage, two Jedi Knights lead a  desperate mission to rescue the  captive Chancellor...."
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toStartOf="@+id/iv_film"
+            app:layout_constraintTop_toBottomOf="@+id/iv_film" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
         </android.support.constraint.ConstraintLayout>
-
     </ScrollView>
 
     <android.support.v7.widget.CardView

@@ -1,4 +1,4 @@
-package br.com.levisaturnino.novelas.mvp.proximocapitulo
+package br.com.levisaturnino.starwars.mvp.people
 
 
 import br.com.levisaturnino.starwars.domain.People

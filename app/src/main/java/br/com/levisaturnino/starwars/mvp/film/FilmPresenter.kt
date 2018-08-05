@@ -1,13 +1,15 @@
-package br.com.levisaturnino.novelas.mvp.proximocapitulo
+package br.com.levisaturnino.starwars.mvp.film
 
 
 import android.content.Context
 import android.view.View
+
 import br.com.levisaturnino.starwars.domain.Film
+import br.com.levisaturnino.starwars.utils.Utils
 
 import java.util.*
 
-class FilmPresenter : IFilm.FilmPresenterImpl {
+class FilmPresenter(val conts: Context) : IFilm.FilmPresenterImpl {
 
     private val model: IFilm.FilmModelImpl
     private var view: IFilm.FilmViewImpl? = null
@@ -23,17 +25,17 @@ class FilmPresenter : IFilm.FilmPresenterImpl {
         get() = (view as Context?)!!
 
     init {
-        this.model = FilmModel(this)
+        this.model = FilmModel(conts,this)
     }
 
 
     override fun getFilmsRequest() {
-       // if (Utils.isNetworkAvailable(context)) {
-       // if (Utils.isNetworkAvailable(context)) {
+
+        if (Utils.isNetworkAvailable(conts)) {
             model.getFilmsRequest()
-        /*} else {
-            Utils.getMessage(context)
-        }*/
+        } else {
+            Utils.getMessage(conts)
+        }
 
     }
 
@@ -42,6 +44,5 @@ class FilmPresenter : IFilm.FilmPresenterImpl {
         val visibilidade = if (status) View.VISIBLE else View.GONE
         view?.showProgressBar(visibilidade)
     }
-
 
 }
